@@ -19,8 +19,7 @@ const EstiloNaveBar=styled.div`
   
  display: flex;
  background-color: #126BA5;
- height: 70px;
- width: 375px;
+ align-items: center;
 
   .logo{
     display: flex;
@@ -36,11 +35,10 @@ const EstiloNaveBar=styled.div`
     }
 
     .imageuser{
-      width: 51px;
-      height: 51px;
+      width: 45px;
+      height: 45px;
       margin-left: 170px;
-      margin-top: 10px;
-
+      
         img{
           height: 100%;
           border-radius:98px;
