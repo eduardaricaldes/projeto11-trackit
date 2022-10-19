@@ -1,0 +1,1 @@
+export const URL_HISTORICO_GET = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/history/daily"
