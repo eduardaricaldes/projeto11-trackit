@@ -2,7 +2,7 @@ import styled from "styled-components";
 import logo from "../assets/logo.png";
 export default function Login (){
   return(
-    <EstiloContainer>
+    <EstiloContainerLogin>
       <div className="logo">
         <img src={logo} alt="logo"></img></div>
         <div className="inputs">
@@ -11,11 +11,11 @@ export default function Login (){
         </div>
         <button>Entrar</button>
         <p>Não tem uma conta? Cadastre-se!</p>
-    </EstiloContainer>
+    </EstiloContainerLogin>
   )
 }
 
- const EstiloContainer=styled.div`
+ const EstiloContainerLogin=styled.div`
   padding: 40px 40px;
   display: flex;
   flex-direction: column;
