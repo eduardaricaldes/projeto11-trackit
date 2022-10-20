@@ -20,6 +20,7 @@ const EstiloNaveBar=styled.div`
  display: flex;
  background-color: #126BA5;
  align-items: center;
+ justify-content:space-between;
 
   .logo{
     display: flex;

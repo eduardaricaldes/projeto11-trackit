@@ -17,11 +17,14 @@ export default function Habitos(){
 const EstiloContainerHabitos=styled.div`
 padding: 20px 10px;
 font-family: 'Lexend Deca', sans-serif;
+background-color: #E5E5E5;
+
 
   .top{
     display: flex;
     flex-direction: row;
     margin-bottom: 28px;
+    justify-content:space-between;
 
 
     h1{
@@ -39,7 +42,7 @@ font-family: 'Lexend Deca', sans-serif;
       font-size: 26px ;
       border-radius: 4px;
       text-transform: uppercase;
-      color #fff;
+      color: #FFFF;
 
     }
   }
