@@ -19,7 +19,6 @@ export default function Footer(){
 }
 
 const EstiloContainerFooter=styled.div`
-  height: 70px;
   position: fixed;
   bottom: 0;
   padding: 10px 10px;
@@ -31,18 +30,29 @@ const EstiloContainerFooter=styled.div`
       justify-content: space-between;
       margin-left: 80px;
       align-items: center;
-      
-        p{
+      background-color: #fff;
+      p{
           color:#52B6FF;
           font-size:18px;
         }
+
+      .habitos{
+        margin-left: 36px;
+      }
+
+      .historico{
+        margin-right: 36px;
+      }
+
+      
+        
     }
 `
 
-const EstiloCircularProgressbar=styled.div`
-height: 91px;
-width: 91px;
-margin-left: 28px;
-margin-right: 28px;
-margin-bottom: 10px;
+  const EstiloCircularProgressbar=styled.div`
+    height: 91px;
+    width: 91px;
+    margin-left: 28px;
+    margin-right: 28px;
+    margin-bottom: 10px;
 `

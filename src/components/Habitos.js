@@ -1,3 +1,5 @@
+import CardCriarHabitos from "./Card-criar-habitos";
+import CardCriadoHabitos from "./Card-criado-habitos";
 import styled from "styled-components";
 export default function Habitos(){
   return(
@@ -5,6 +7,10 @@ export default function Habitos(){
       <div className="top">
         <h1>Meus Hábitos</h1>
         <button>+</button>
+      </div>
+      <div className="maincards">
+        <CardCriarHabitos/>
+        <CardCriadoHabitos/>
       </div>
       <div className="aviso">
         <p>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</p>
@@ -18,12 +24,11 @@ const EstiloContainerHabitos=styled.div`
 padding: 20px 10px;
 font-family: 'Lexend Deca', sans-serif;
 background-color: #E5E5E5;
-
+align-items: center;
 
   .top{
-    display: flex;
-    flex-direction: row;
     margin-bottom: 28px;
+    display: flex;
     justify-content:space-between;
 
 
@@ -46,6 +51,10 @@ background-color: #E5E5E5;
 
     }
   }
+    .maincards{
+    }
+    
+
   .aviso{
     height: 74px;
     width: 338px;
