@@ -15,7 +15,7 @@ export default function Login (){
   const [senha, setSenha] = useState("")
   const [inativarCampos, setInativarCampos] = useState(false);
   const [inativarBotao, setInativarBotao] = useState(false);
-  const [token, setToken] = useContext(AutenticacaoContext);
+  const [token, setToken, logado, setLogado] = useContext(AutenticacaoContext);
   const [usuario, setUsuario] = useContext(UsuarioContext);
   const navigate = useNavigate();
 
@@ -39,6 +39,7 @@ export default function Login (){
       email: usuario.email,
     });
     setToken(usuario.token);
+    setLogado(true);
   }
 
   function inativarForm() {

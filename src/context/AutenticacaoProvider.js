@@ -10,7 +10,7 @@ export const AutenticacaoContext = createContext([
 
 export const AutenticacaoProvider = ({ children }) => {
   const [token, setToken] = useState("");
-  const navigate = useNavigate();
+  const [logado, setLogado] = useState(false);
 
   function armazenarToken(token) {
     setToken(token);
@@ -21,16 +21,17 @@ export const AutenticacaoProvider = ({ children }) => {
     if(token === "") {
       const tokenDoLocalStorage = localStorage.getItem("token");
       if(!tokenDoLocalStorage) {
-        navigate("/");
+        setLogado(false)
       }else {
+        setLogado(true)
         setToken(tokenDoLocalStorage)
       }
     }
     
-  }, [navigate, token])
+  }, [logado, token])
 
   return (
-    <AutenticacaoContext.Provider value={[token, armazenarToken]}>
+    <AutenticacaoContext.Provider value={[token, armazenarToken, logado, setLogado]}>
       {children}
     </AutenticacaoContext.Provider>
   )
