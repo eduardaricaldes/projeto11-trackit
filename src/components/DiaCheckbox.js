@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export default function DiasCheckbox({ label, value, onCheckDias, listDeDias }){
+export default function DiasCheckbox({ label, value, onCheckDias, listDeDias, disabled = false }){
   return(
     <>
       <EstiloCheckbox>
@@ -11,6 +11,7 @@ export default function DiasCheckbox({ label, value, onCheckDias, listDeDias }){
           defaultChecked={
             listDeDias.indexOf(value) !== -1 ? true: false 
           }  
+          disabled={disabled}
         />
         <span className="checkbox-label">{label}</span>
       </EstiloCheckbox>

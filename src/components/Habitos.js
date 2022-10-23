@@ -20,6 +20,7 @@ export default function Habitos(){
   const [nome, setNome] = useState("")
   const [listDeDias, setListaDeDias] = useState([]);
 
+  console.log(habitos)
   useEffect(() => {
     axios(URL_HABITOS_GET, {
       headers: {
@@ -43,8 +44,7 @@ export default function Habitos(){
   }
 
   function adicionarHabito(habito) {
-    habitos.push(habito);
-    setHabitos(habitos)
+    setHabitos([...habitos, habito])
   }
 
   function removerHabito(habito) {
@@ -53,7 +53,7 @@ export default function Habitos(){
     })
 
     habitos.splice(index, 1);
-    setHabitos(habitos);
+    setHabitos([...habitos]);
   }
 
   function removerForm() {

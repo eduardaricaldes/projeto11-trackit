@@ -31,7 +31,7 @@ export default function CardCriarHabitos(
   function onCheckDias(event) {
     const checkbox = event.target
     if(checkbox && checkbox.checked) {
-      listDeDias.push(checkbox.value)
+      listDeDias.push(parseInt(checkbox.value))
       setListaDeDias(listDeDias)
     }else {
       const index = listDeDias.findIndex(value => {
@@ -49,6 +49,7 @@ export default function CardCriarHabitos(
 
   function resetarForm() {
     setNome("");
+    setListaDeDias([])
     setInativarCampos(false);
     setInativarBotao(false);
   }

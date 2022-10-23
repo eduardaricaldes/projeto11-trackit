@@ -42,6 +42,7 @@ export default function CardCriadoHabitos({ id, name, days = [], removerHabito})
                 label={dia.label}
                 value={dia.value}
                 listDeDias={days}
+                disabled={true}
               />
             )
           })
