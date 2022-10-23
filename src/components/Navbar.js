@@ -22,7 +22,11 @@ const EstiloNaveBar=styled.div`
  align-items: center;
  justify-content:space-between;
  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+ height: 70px;
  padding: 10px 18px; 
+ position: fixed;
+ width: 100%;
+ top: 0;
  .logo{
     display: flex;
     
