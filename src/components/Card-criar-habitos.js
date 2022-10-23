@@ -9,9 +9,15 @@ import {AutenticacaoContext} from '../context/AutenticacaoProvider';
 import { diasCheckbox } from "../constants/dias-checkbox";
 import {URL_HABITOS_POST} from "../constants/api-trackit/url-habitos/url-habitos-post";
 
-export default function CardCriarHabitos({ removerForm, adicionarHabito }){
-  const [nome, setNome] = useState("")
-  const [listDeDias, setListaDeDias] = useState([]);
+export default function CardCriarHabitos(
+  {
+    removerForm,
+    adicionarHabito,
+    nome,
+    setNome,
+    listDeDias,
+    setListaDeDias,
+  }){
   const [inativarCampos, setInativarCampos] = useState(false);
   const [inativarBotao, setInativarBotao] = useState(false);
   const [token, setToken, logado, setLogado] = useContext(AutenticacaoContext);
@@ -81,6 +87,7 @@ export default function CardCriarHabitos({ removerForm, adicionarHabito }){
             placeholder="nome do hábito"
             onChange={event =>onChangeNome(event.target.value)}
             disabled={inativarCampos}
+            value={nome}
           />
         </div>
         <div className="diasinpult">
@@ -99,7 +106,13 @@ export default function CardCriarHabitos({ removerForm, adicionarHabito }){
           }
         </div>
         <div className="botoes">
-          <button className="cancelar" disabled={inativarBotao}>Cancelar</button>
+          <button className="cancelar"
+            disabled={inativarBotao}
+            onClick={removerForm}
+            type="button"
+            >
+              Cancelar
+          </button>
           <button className="salvar" disabled={inativarBotao}>
             {
               inativarBotao ? (

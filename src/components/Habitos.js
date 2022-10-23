@@ -16,6 +16,9 @@ export default function Habitos(){
   const [mostrarHabitoVazio, setMostrarHabitoVazio] = useState(false);
   const [token, setToken] = useContext(AutenticacaoContext);
   const [mostrarCriarHabito, setMostrarHabito] = useState(false);
+  // form de criacao de habito
+  const [nome, setNome] = useState("")
+  const [listDeDias, setListaDeDias] = useState([]);
 
   useEffect(() => {
     axios(URL_HABITOS_GET, {
@@ -65,6 +68,10 @@ export default function Habitos(){
                 <CardCriarHabitos
                   removerForm={removerForm}
                   adicionarHabito={adicionarHabito}
+                  nome={nome}
+                  setNome={setNome}
+                  listDeDias={listDeDias}
+                  setListaDeDias={setListaDeDias}
                 />
               ): <></>
             }
