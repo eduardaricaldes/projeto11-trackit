@@ -35,6 +35,7 @@ background-color: #fff;
 font-size: 19px;
 margin-bottom: 10px;
 padding: 15px 18px;
+box-sizing: border-box;
   .titulocardcriado{
     display: flex;
     justify-content:space-between;

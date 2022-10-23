@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from 'react-router-dom'
 import CircularProgress from "./CircularProgressbar";
 
 
@@ -7,11 +8,13 @@ export default function Footer(){
   return(
     <EstiloContainerFooter>
       <div className="footer">
-        <p className="habitos">Hábitos</p>
+        <Link className="habitos" to="/habitos">Hábitos</Link>
         <EstiloCircularProgressbar>
-          <CircularProgress/>
+          <div className="circular-progress">
+            <CircularProgress/>
+          </div>
         </EstiloCircularProgressbar>
-        <p className="historico">Histórico</p>
+        <Link className="historico" to="/historico">Histórico</Link>
       </div>
     </EstiloContainerFooter>
     
@@ -21,38 +24,30 @@ export default function Footer(){
 const EstiloContainerFooter=styled.div`
   position: fixed;
   bottom: 0;
-  padding: 10px 10px;
   font-family: 'Lexend Deca', sans-serif;
-    .footer{
-      display: flex;
-      height: 100%;
-      flex-direction:row;
-      justify-content: space-between;
-      margin-left: 80px;
-      align-items: center;
-      background-color: #fff;
-      p{
-          color:#52B6FF;
-          font-size:18px;
-        }
+  width: 100%;
+  background-color: #fff;
+  .footer {
+    height: 70px;
+    padding: 10px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-      .habitos{
-        margin-left: 36px;
-      }
-
-      .historico{
-        margin-right: 36px;
-      }
-
-      
-        
+    .habitos,
+    .historico {
+      color: #52B6FF;
+      text-decoration:none;
     }
+  }
 `
 
-  const EstiloCircularProgressbar=styled.div`
-    height: 91px;
+const EstiloCircularProgressbar=styled.div`
+  position: relative;
+  height: 91px;
     width: 91px;
-    margin-left: 28px;
-    margin-right: 28px;
-    margin-bottom: 10px;
+  .circular-progress {
+    position: absolute;
+    top: -20px;
+  }
 `
