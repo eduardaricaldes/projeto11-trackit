@@ -7,7 +7,7 @@ import { ThreeDots } from 'react-loader-spinner';
 import logo from "../assets/logo.png";
 import {URL_LOGIN} from '../constants/api-trackit/url-login';
 import {AutenticacaoContext} from '../context/AutenticacaoProvider';
-import { UsuarioContext } from './context/UsuarioProvider';
+import { UsuarioContext } from '../context/UsuarioProvider';
 
 
 export default function Login (){
@@ -101,7 +101,7 @@ export default function Login (){
               ariaLabel="comment-loading"
               wrapperClass=""
               wrapperStyle={{
-                "justify-content": "center"
+                justifyContent: "center"
               }}
               color="#fff"
             />
