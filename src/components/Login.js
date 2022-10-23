@@ -59,7 +59,7 @@ export default function Login (){
       inativarForm();
       axios.post(URL_LOGIN, {
         email: email,
-        senha: senha,
+        password: senha,
       }).then((response) => {
         setarUsuario(response.data);
         navigate("/habitos")
