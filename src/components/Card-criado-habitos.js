@@ -1,15 +1,37 @@
 import styled from "styled-components";
+import {useState, useEffect, useContext} from 'react';
+import axios from "axios";
+
 import lixo from "../assets/lixo.svg";
+import {URL_HABITOS_DELET} from "../constants/api-trackit/url-habitos/url-habitos-delet";
+import {AutenticacaoContext} from '../context/AutenticacaoProvider';
 
 import DiaCheckbox from "./DiaCheckbox";
 import { diasCheckbox } from "../constants/dias-checkbox";
 
-export default function CardCriadoHabitos({ name, days = []}){
+export default function CardCriadoHabitos({ id, name, days = [], removerHabito}){
+  const [token, setToken] = useContext(AutenticacaoContext);
+  
+  function deletar(idClicado) {
+    if(window.confirm("Deseja remover esse hábito?")){
+      axios.delete(`${URL_HABITOS_DELET}${idClicado}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      .then((response) => {
+        removerHabito(id)
+      }).catch(() => {
+        alert("Nao conseguimos deletar seu habito")
+      })
+    }
+  }
+
   return(
   <EstiloContainerCardCriadoHabitos>
       <div className="titulocardcriado">
         <h2 className="titulohabito">{name}</h2>
-        <img src={lixo} alt="lixo"></img>
+        <img src={lixo} alt="lixo" onClick={() => deletar(id)}></img>
       </div>
       <div className="diasinpult">
         {

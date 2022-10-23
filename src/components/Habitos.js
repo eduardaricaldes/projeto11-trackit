@@ -47,6 +47,15 @@ export default function Habitos(){
     setHabitos(habitos)
   }
 
+  function removerHabito(habito) {
+    const index = habitos.findIndex((item) => {
+      return item.id === habito;
+    })
+
+    habitos.splice(index, 1);
+    setHabitos(habitos);
+  }
+
   function removerForm() {
     setMostrarHabito(false);
   }
@@ -80,8 +89,10 @@ export default function Habitos(){
                 return (
                   <CardCriadoHabitos
                     key={habito.id}
+                    id={habito.id}
                     name={habito.name}
                     days={habito.days}
+                    removerHabito={removerHabito}
                   />
                 )
               })
