@@ -21,12 +21,12 @@ const EstiloNaveBar=styled.div`
  background-color: #126BA5;
  align-items: center;
  justify-content:space-between;
-
-  .logo{
+ box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+ padding: 10px 18px; 
+ .logo{
     display: flex;
-    padding: 10px 10px 10px 10px;
+    
     align-items: center;
-
   }
 
   p{
