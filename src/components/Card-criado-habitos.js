@@ -4,11 +4,11 @@ import lixo from "../assets/lixo.svg";
 import DiaCheckbox from "./DiaCheckbox";
 import { diasCheckbox } from "../constants/dias-checkbox";
 
-export default function CardCriadoHabitos(){
+export default function CardCriadoHabitos({ name, days = []}){
   return(
   <EstiloContainerCardCriadoHabitos>
       <div className="titulocardcriado">
-        <h2 className="titulohabito">Ler 1 Capitulo de livro</h2>
+        <h2 className="titulohabito">{name}</h2>
         <img src={lixo} alt="lixo"></img>
       </div>
       <div className="diasinpult">

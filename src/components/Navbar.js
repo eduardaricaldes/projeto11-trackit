@@ -1,7 +1,6 @@
 import { useContext } from "react";
 
 import styled from "styled-components";
-import teste from "../assets/teste.jpeg";
 import { UsuarioContext } from '../context/UsuarioProvider';
 
 export default function NavBar(){
