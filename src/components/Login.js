@@ -1,17 +1,22 @@
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import axios from "axios";
 import { ThreeDots } from 'react-loader-spinner';
 
 import logo from "../assets/logo.png";
 import {URL_LOGIN} from '../constants/api-trackit/url-login';
+import {AutenticacaoContext} from '../context/AutenticacaoProvider';
+import { UsuarioContext } from './context/UsuarioProvider';
+
 
 export default function Login (){
   const [email, setEmail] = useState("")
   const [senha, setSenha] = useState("")
   const [inativarCampos, setInativarCampos] = useState(false);
   const [inativarBotao, setInativarBotao] = useState(false);
+  const [token, setToken] = useContext(AutenticacaoContext);
+  const [usuario, setUsuario] = useContext(UsuarioContext);
   const navigate = useNavigate();
 
   function onChangeEmail(value) {
@@ -24,6 +29,16 @@ export default function Login (){
     if(value !== "") {
       setSenha(value);
     }
+  }
+
+  function setarUsuario(usuario) {
+    setUsuario({
+      id: usuario.id,
+      name: usuario.name,
+      image: usuario.image,
+      email: usuario.email,
+    });
+    setToken(usuario.token);
   }
 
   function inativarForm() {
@@ -46,6 +61,7 @@ export default function Login (){
         email: email,
         senha: senha,
       }).then((response) => {
+        setarUsuario(response.data);
         navigate("/habitos")
       }).catch(() => {
         alert("Usuario e senha incorretos");
