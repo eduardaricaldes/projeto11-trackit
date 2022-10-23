@@ -1,99 +1,82 @@
 import styled from "styled-components";
+import DiaCheckbox from "./DiaCheckbox";
+
+import { diasCheckbox } from "../constants/dias-checkbox";
 
 export default function CardCriarHabitos(){
+
   return(
     <EstiloContainerCardCriarHabitos>
-      <div className="main">
-        <div className="inputnomehabito">
-          <input className="nomehabito" placeholder="nome do hábito"></input>
-        </div>
-        <div className="diasinpult">
-          <input className="d" placeholder="D"/>
-          <input className="s" placeholder="S"/>
-          <input className="t" placeholder="T"/>
-          <input className="q" placeholder="Q"/>
-          <input className="qui" placeholder="Q"/>
-          <input className="sex" placeholder="S"/>
-          </div>
-          <div className="botoes">
-            <div className="cancelar">
-              <button className="cancelar">Cancelar</button>
-            </div>
-            <div className="salvar">
-              <button className="salvar">Salvar</button>
-            </div>
-          </div>
-      </div>  
-      
-
+      <div className="inputnomehabito">
+        <input className="nomehabito" placeholder="nome do hábito"></input>
+      </div>
+      <div className="diasinpult">
+        {
+          diasCheckbox.map((dia) => {
+            return (
+              <DiaCheckbox
+                key={dia.id}
+                label={dia.label}
+                value={dia.value}
+              />
+            )
+          })
+        }
+      </div>
+      <div className="botoes">
+        <button className="cancelar">Cancelar</button>
+        <button className="salvar">Salvar</button>
+      </div>
     </EstiloContainerCardCriarHabitos>
   )
 }
 
 const EstiloContainerCardCriarHabitos=styled.div`
-height: 180px;
-width: 340px;
 border-radius: 5px;
 background-color: #fff;
 font-family: 'Lexend Deca', sans-serif;
 font-size: 19px;
 margin-bottom: 10px;
-  .main{
-    .inputnomehabito{
-      input{
-        margin-top: 18px;
-        margin-left: 18px;
-        margin-bottom: 8px;
-        height: 45px;
-        width: 303px;
-        border-radius: 5px;
-        border: none;
-        border: 1px solid #D5D5D5;
+padding: 15px 18px;
+  .inputnomehabito{
+    margin-bottom: 8px;
+    input{
+      height: 45px;
+      border-radius: 5px;
+      border: none;
+      border: 1px solid #D5D5D5;
+      width: 100%;
+      ::placeholder{
+        color: #DBDBDB;
+        padding: 6px;
+      }
     }
   }
 
   .diasinpult{
-    margin-left: 18px;
-      input{
-        margin-left: 2px;
-        height: 30px;
-        width: 30px;
-        border-radius: 5px;
-        border: none;
-        border: 1px solid #D5D5D5;
-        text-align: center;
-        margin-bottom: 22px;
-      }
+    display: flex;
+    margin-bottom: 30px;
   }
 
   .botoes {
     display: flex;
-    justify-content:column;
-    margin-left: 148px;
-
+    justify-content: end;
     .cancelar{
-      button{
-        color: #52B6FF;
-        border: none;
-        background-color: #fff;
-        height: 35px;
-        width: 84px;
-      }
+      color: #52B6FF;
+      border: none;
+      background-color: #fff;
+      height: 35px;
+      width: 84px;
+      margin-right: 30px;
     }
     .salvar{
-      button{
-        height: 35px;
-        width: 84px;
-        background-color: #52B6FF;
-        border: none;
-        border-radius: 4px;
-        color: #ffff;
-      }
+      height: 35px;
+      width: 84px;
+      background-color: #52B6FF;
+      border: none;
+      border-radius: 4px;
+      color: #ffff;
     }
-    
   }
-
-  }
-  
 
 `
