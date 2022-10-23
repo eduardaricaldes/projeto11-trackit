@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import logo from "../assets/logo.png";
 import { Link } from "react-router-dom";
 
+import logo from "../assets/logo.png";
 
 export default function Login (){
   return(
@@ -13,7 +13,7 @@ export default function Login (){
           <input className="senha" type="password" placeholder="senha"></input>
         </div>
         <button>Entrar</button>
-        <Link className="cadastrar">Não tem uma conta? Cadastre-se!</Link>
+        <Link className="cadastrar" to="/cadastro">Não tem uma conta? Cadastre-se!</Link>
     </EstiloContainerLogin>
   )
 }
