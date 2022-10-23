@@ -1,10 +1,11 @@
 import styled from "styled-components";
-
-import Hoje from "./Hoje"
+import Navbar from "./Navbar";
+import Hoje from "./Hoje";
 
 export default function Container() {
   return (
     <EstiloContainer>
+      <Navbar/>
       <Hoje />
     </EstiloContainer>
   )
