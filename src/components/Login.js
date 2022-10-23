@@ -1,19 +1,98 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import axios from "axios";
+import { ThreeDots } from 'react-loader-spinner';
 
 import logo from "../assets/logo.png";
+import {URL_LOGIN} from '../constants/api-trackit/url-login';
 
 export default function Login (){
+  const [email, setEmail] = useState("")
+  const [senha, setSenha] = useState("")
+  const [inativarCampos, setInativarCampos] = useState(false);
+  const [inativarBotao, setInativarBotao] = useState(false);
+  const navigate = useNavigate();
+
+  function onChangeEmail(value) {
+    if(value !== "") {
+      setEmail(value);
+    }
+  }
+
+  function onChangeSenha(value) {
+    if(value !== "") {
+      setSenha(value);
+    }
+  }
+
+  function inativarForm() {
+    setInativarCampos(true);
+    setInativarBotao(true);
+  }
+
+  function resetarForm() {
+    setEmail("");
+    setSenha("");
+    setInativarCampos(false);
+    setInativarBotao(false);
+  }
+
+  function submit(event) {
+    event.preventDefault()
+    if(email !== "" && senha !== "") {
+      inativarForm();
+      axios.post(URL_LOGIN, {
+        email: email,
+        senha: senha,
+      }).then((response) => {
+        navigate("/habitos")
+      }).catch(() => {
+        alert("Usuario e senha incorretos");
+        resetarForm();
+        event.target.reset()
+      });
+    }
+  }
+
   return(
     <EstiloContainerLogin>
       <div className="logo">
-        <img src={logo} alt="logo"></img></div>
+        <img src={logo} alt="logo"></img>
+      </div>
+      <form onSubmit={submit}>
         <div className="inputs">
-          <input className="email" type="email" placeholder="email"></input>
-          <input className="senha" type="password" placeholder="senha"></input>
+          <input
+            className="email"
+            type="email"
+            placeholder="email"
+            onChange={event => onChangeEmail(event.target.value)}
+            disabled={inativarCampos}
+            ></input>
+          <input
+            className="senha"
+            type="password"
+            placeholder="senha"
+            onChange={event => onChangeSenha(event.target.value)}
+            disabled={inativarCampos}
+          ></input>
         </div>
-        <button>Entrar</button>
-        <Link className="cadastrar" to="/cadastro">Não tem uma conta? Cadastre-se!</Link>
+        <button className="submit-button" disabled={inativarBotao} type="submit">{
+          inativarBotao ? (
+            <ThreeDots
+              height={12}
+              visible={true}
+              ariaLabel="comment-loading"
+              wrapperClass=""
+              wrapperStyle={{
+                "justify-content": "center"
+              }}
+              color="#fff"
+            />
+          ): "Entrar"
+        }</button>
+      </form>
+      <Link className="cadastrar" to="/cadastro">Não tem uma conta? Cadastre-se!</Link>
     </EstiloContainerLogin>
   )
 }
@@ -50,8 +129,11 @@ export default function Login (){
           }
         }
     }
-    button{
-      padding: 11px 112px 11px 112px;
+    .submit-button{
+      text-align: center;
+      width: 100%;
+      height: 45px;
+      padding: 11px 20px;
       background-color: #52B6FF;
       border: none;
       border-radius: 4px;
