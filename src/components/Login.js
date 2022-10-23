@@ -1,5 +1,8 @@
 import styled from "styled-components";
 import logo from "../assets/logo.png";
+import { Link } from "react-router-dom";
+
+
 export default function Login (){
   return(
     <EstiloContainerLogin>
@@ -10,40 +13,41 @@ export default function Login (){
           <input className="senha" type="password" placeholder="senha"></input>
         </div>
         <button>Entrar</button>
-        <p>Não tem uma conta? Cadastre-se!</p>
+        <Link className="cadastrar">Não tem uma conta? Cadastre-se!</Link>
     </EstiloContainerLogin>
   )
 }
 
  const EstiloContainerLogin=styled.div`
-  padding: 40px 40px;
+  padding: 50px 40px;
   display: flex;
   flex-direction: column;
-  align-items: center;
   font-family: 'Lexend Deca', sans-serif;
     .logo{
-      height: 178.38px;
-      width: 190px;
-      border-radius: 0px;
       display: flex;
-      justify-content:center;
+      justify-content: center;
+      margin-bottom:32px;
       img {
-        width: 100%;
+        height: 178.38px;
+        width: 190px;
       }
     }
     .inputs{
-      display: flex;
-      flex-direction: column;
+        display: flex;
+        flex-direction: column;
         input{
+          font-weight: 400;
+          display: block;
           margin-bottom: 5px;
           height: 45px;
-          width: 268px;
           border: 1px solid #D5D5D5;
           border-radius:4px ;
           font-size: 18px;
           padding: 6px;
-          color: #DBDBDB;
-
+          color: #666666;
+          ::placeholder {
+            color: #DBDBDB;
+          }
         }
     }
     button{
@@ -55,9 +59,10 @@ export default function Login (){
       font-size: 20px;
       margin-bottom: 25px;
     }
-    p{
+    .cadastrar{
       font-size: 12px;
       color:#52B6FF;
+      text-align: center;
     }
 
  `
