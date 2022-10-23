@@ -39,6 +39,7 @@ const CardDados = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  flex-grow: 2;
   h2 {
     font-weight: 400;
     font-size: 20px;
