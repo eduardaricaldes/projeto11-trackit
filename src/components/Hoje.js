@@ -1,23 +1,29 @@
 import styled from "styled-components";
 import MainCardHj from "./Main-cards-hj";
-
+import Navbar from "./Navbar";
+import Footer from "./Footer";
+import Container from './Container';
 
 export default function Hoje(){
   return(
     <>
-      <EstiloContainerHabitos>
-        <div className="top">
-          <h1>Segunda, 17/05</h1>
-          <div className="subtop">
-            <p className="porcentagem">67% dos hábitos concluídos</p> 
-            <p className="nadaconcluido">Nenhum hábito concluído ainda.</p> 
+      <Navbar/>
+      <Container>
+        <EstiloContainerHabitos>
+          <div className="top">
+            <h1>Segunda, 17/05</h1>
+            <div className="subtop">
+              <p className="porcentagem">67% dos hábitos concluídos</p> 
+              <p className="nadaconcluido">Nenhum hábito concluído ainda.</p> 
+            </div>
           </div>
-        </div>
-      </EstiloContainerHabitos>
+        </EstiloContainerHabitos>
 
-      <MainCardsHoje>
-        <MainCardHj/>
-      </MainCardsHoje>
+        <MainCardsHoje>
+          <MainCardHj/>
+        </MainCardsHoje>
+      </Container>
+      <Footer />
     </>
     
   )
