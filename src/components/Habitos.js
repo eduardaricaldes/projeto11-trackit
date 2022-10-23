@@ -17,7 +17,6 @@ export default function Habitos(){
   const [token, setToken] = useContext(AutenticacaoContext);
   const [mostrarCriarHabito, setMostrarHabito] = useState(false);
 
-
   useEffect(() => {
     axios(URL_HABITOS_GET, {
       headers: {
@@ -33,10 +32,16 @@ export default function Habitos(){
       }).catch(() => {
         alert("Nao conseguimos baixar seus habitos")
       })
-  }, [])
+  }, [token, habitos])
 
   function criarHabitos() {
     setMostrarHabito(true)
+    setMostrarHabitoVazio(false);
+  }
+
+  function adicionarHabito(habito) {
+    habitos.push(habito);
+    setHabitos(habitos)
   }
 
   function removerForm() {
@@ -57,7 +62,10 @@ export default function Habitos(){
           <div className="maincards">
             {
               mostrarCriarHabito ? (
-                <CardCriarHabitos removerForm={removerForm}/>
+                <CardCriarHabitos
+                  removerForm={removerForm}
+                  adicionarHabito={adicionarHabito}
+                />
               ): <></>
             }
             {
@@ -89,6 +97,7 @@ export default function Habitos(){
 const EstiloContainerHabitos=styled.div`
 font-family: 'Lexend Deca', sans-serif;
 align-items: center;
+overflow-y: scroll;
   .top{
     margin-bottom: 28px;
     display: flex;

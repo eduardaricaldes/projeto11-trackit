@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
-export default function DiasCheckbox({ label, value }){
+export default function DiasCheckbox({ label, value, onCheckDias }){
   return(
     <>
       <EstiloCheckbox>
-        <input type="checkbox" value={value}/>
+        <input type="checkbox" value={value} onClick={event => onCheckDias(event)}/>
         <span className="checkbox-label">{label}</span>
       </EstiloCheckbox>
     </>
