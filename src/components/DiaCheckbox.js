@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export default function DiasCheckbox({ label, value, onCheckDias, listDeDias }){
-  console.log(listDeDias)
   return(
     <>
       <EstiloCheckbox>
