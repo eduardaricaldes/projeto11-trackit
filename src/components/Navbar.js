@@ -1,14 +1,19 @@
+import { useContext } from "react";
+
 import styled from "styled-components";
 import teste from "../assets/teste.jpeg";
+import { UsuarioContext } from '../context/UsuarioProvider';
 
 export default function NavBar(){
+  const [usuario, setUsuario] = useContext(UsuarioContext);
+
   return(
     <EstiloNaveBar>
       <div className="logo">
         <p>TrackIt</p>
       </div>
       <div className="imageuser">
-        <img src={teste} alt="user"></img>
+        <img src={usuario?.image} alt="user"></img>
       </div>
     </EstiloNaveBar>
   )
