@@ -1,10 +1,18 @@
 import styled from "styled-components";
 
-export default function DiasCheckbox({ label, value, onCheckDias }){
+export default function DiasCheckbox({ label, value, onCheckDias, listDeDias }){
+  console.log(listDeDias)
   return(
     <>
       <EstiloCheckbox>
-        <input type="checkbox" value={value} onClick={event => onCheckDias(event)}/>
+        <input
+          type="checkbox"
+          value={value}
+          onClick={event => onCheckDias(event)}
+          defaultChecked={
+            listDeDias.indexOf(value) !== -1 ? true: false 
+          }  
+        />
         <span className="checkbox-label">{label}</span>
       </EstiloCheckbox>
     </>

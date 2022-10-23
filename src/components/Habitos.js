@@ -35,7 +35,7 @@ export default function Habitos(){
       }).catch(() => {
         alert("Nao conseguimos baixar seus habitos")
       })
-  }, [token, habitos])
+  }, [token])
 
   function criarHabitos() {
     setMostrarHabito(true)

@@ -41,6 +41,7 @@ export default function CardCriadoHabitos({ id, name, days = [], removerHabito})
                 key={dia.id}
                 label={dia.label}
                 value={dia.value}
+                listDeDias={days}
               />
             )
           })

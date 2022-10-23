@@ -100,6 +100,7 @@ export default function CardCriarHabitos(
                   value={dia.value}
                   onCheckDias={onCheckDias}
                   disabled={inativarCampos}
+                  listDeDias={listDeDias}
                 />
               )
             })
