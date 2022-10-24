@@ -3,13 +3,14 @@ import { BrowserRouter } from 'react-router-dom';
 import "./reset.css"
 import { AutenticacaoProvider } from './context/AutenticacaoProvider';
 import { UsuarioProvider } from './context/UsuarioProvider';
+
 import App from './App';
 
 ReactDom.render(
   <BrowserRouter>
     <AutenticacaoProvider>
       <UsuarioProvider>
-        <App/>
+          <App/>
       </UsuarioProvider>
     </AutenticacaoProvider>
   </BrowserRouter>

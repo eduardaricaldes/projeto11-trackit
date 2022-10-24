@@ -1,1 +1,1 @@
-export const URL_HABITOS_HJ_POST_CHECK = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/ID_DO_HABITO/check"
+export const URL_HABITOS_HJ_POST_CHECK = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/"

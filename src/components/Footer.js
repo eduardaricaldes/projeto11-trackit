@@ -1,17 +1,21 @@
+import { useContext } from "react";
+
 import styled from "styled-components";
 import { Link } from 'react-router-dom'
 import CircularProgress from "./CircularProgressbar";
+import {HabitosContext} from '../context/HabitosConcluidosProvider';
 
 
 export default function Footer(){
-  const value = 0.96;
+  const [setTotalAtivos, totalAtivos, setTotalHabitos, percentual] = useContext(HabitosContext) 
+  
   return(
     <EstiloContainerFooter>
       <div className="footer">
         <Link className="habitos" to="/habitos">Hábitos</Link>
         <EstiloCircularProgressbar>
           <div className="circular-progress">
-            <CircularProgress/>
+            <CircularProgress percentual={percentual}/>
           </div>
         </EstiloCircularProgressbar>
         <Link className="historico" to="/historico">Histórico</Link>

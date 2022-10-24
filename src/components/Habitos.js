@@ -14,13 +14,12 @@ import {AutenticacaoContext} from '../context/AutenticacaoProvider';
 export default function Habitos(){
   const [habitos, setHabitos] = useState([]);
   const [mostrarHabitoVazio, setMostrarHabitoVazio] = useState(false);
-  const [token, setToken] = useContext(AutenticacaoContext);
+  const [token] = useContext(AutenticacaoContext);
   const [mostrarCriarHabito, setMostrarHabito] = useState(false);
   // form de criacao de habito
   const [nome, setNome] = useState("")
   const [listDeDias, setListaDeDias] = useState([]);
 
-  console.log(habitos)
   useEffect(() => {
     axios(URL_HABITOS_GET, {
       headers: {

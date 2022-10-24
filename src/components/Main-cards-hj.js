@@ -2,19 +2,25 @@ import styled from "styled-components";
 
 import check from '../assets/check.svg'
 
-export default function MainCardHj(){
+export default function MainCardHj({ id, name, done, currentSequence, highestSequence, marcarHabito }){
   return(
     <MainCards>
       <CardDados>
-        <h2 className="titulohabito">Ler 1 Capitulo de livro</h2>
+        <h2 className="titulohabito">{name}</h2>
         <DescricaoHabitos>
-          <p className="sequencia">Sequência atual: 3 dias</p>
-          <p className="record">Seu recorde: 3 dias</p>
+          <p className="sequencia">Sequência atual: {currentSequence} dias</p>
+          <p className="record">Seu recorde: {highestSequence} dias</p>
         </DescricaoHabitos>
       </CardDados>
       <CardCheckbox>
         <label>
-          <input type="checkbox"></input>
+          <input
+            type="checkbox"
+            value={id}
+            name={name}
+            defaultChecked={done}
+            onChange={event => marcarHabito(event)}
+          />
           <div className="check-icon">
             <img src={check} alt="check icon" />
           </div>

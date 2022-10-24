@@ -1,17 +1,116 @@
 import styled from "styled-components";
+import { useContext, useState, useEffect } from "react";
+import axios from "axios";
+import * as dayjs from 'dayjs'
+
 import MainCardHj from "./Main-cards-hj";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import Container from './Container';
 
+import {AutenticacaoContext} from '../context/AutenticacaoProvider';
+import {HabitosContext} from '../context/HabitosConcluidosProvider';
+import {URL_HABITOS_HJ_GET} from '../constants/api-trackit/url-habitos-hj/url-habitos-hj-get';
+import {URL_HABITOS_HJ_POST_CHECK} from '../constants/api-trackit/url-habitos-hj/url-habitos-hj-post-check';
+import {URL_HABITOS_HJ_POST_UNCHECK} from '../constants/api-trackit/url-habitos-hj/url-habitos-hj-post-uncheck';
+
+import DiaFormatado from "../funcoes/dia-da-semana";
+
 export default function Hoje(){
+  const [token] = useContext(AutenticacaoContext);
+  const [habitosDeHoje, setHabitos] = useState([]);
+  const [diaDeHoje, setDiaDeHoje] = useState("");
+  const [habitosAtivos, setAtivos] = useState([])
+  const [setTotalAtivos, totalAtivos, setTotalHabitos] = useContext(HabitosContext)
+  
+
+  useEffect(() => {
+    axios(URL_HABITOS_HJ_GET, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+    .then((response) => {
+      const habitos = response.data
+      setHabitos(habitos);
+      setTotalHabitos(habitos.length)
+      const ativos = [];
+      habitos.map((habito) => {
+        if(habito.done) {
+          ativos.push(habito)
+        }
+      });
+      setTotalAtivos(ativos.length);
+      setAtivos(ativos);
+    })
+    .catch(() => {
+      alert("Nao conseguimos achar seus habitos de hoje")
+    })
+  }, [])
+
+  useEffect(() => {
+    const mes = dayjs().month()
+    const diaSemana = dayjs().day()
+    const dia = dayjs().date()
+    const diaFormatado = DiaFormatado(diaSemana, dia, mes + 1)
+    setDiaDeHoje(diaFormatado)
+  }, [])
+
+  function buscaHabito(lista, id) {
+    return lista.find((item) => item.id === id);
+  }
+
+  function buscaHabitoIndex(lista, id) {
+    return lista.findIndex((item) => item.id === id);
+  }
+
+  function marcarHabito(event) {
+    const checkbox = event.target
+    if(checkbox && checkbox.checked){
+      const id = checkbox.value;
+      axios.post(URL_HABITOS_HJ_POST_CHECK + `${id}/check`, {}, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      .then((response) => {
+        const habito = buscaHabito(habitosDeHoje, parseInt(id))
+        habito.done = true
+        const totalAt = totalAtivos + 1 
+        setTotalAtivos(totalAt);
+        setAtivos([...habitosAtivos, habito])
+      })
+      .catch(() => {
+        alert("Problema ao concluir habito")
+      })
+    }else {
+      const id = checkbox.value;
+      axios.post(URL_HABITOS_HJ_POST_UNCHECK + `/${id}/uncheck`, {}, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      .then((response) => {
+        const index = buscaHabitoIndex(habitosDeHoje, parseInt(id))
+        habitosAtivos.splice(index, 1)
+        const totalAt = totalAtivos - 1 
+        setTotalAtivos(totalAt);
+        setAtivos([...habitosAtivos])
+      })
+      .catch(() => {
+        alert("Problema ao concluir habito")
+      }) 
+    }
+  }
+
+
   return(
     <>
       <Navbar/>
       <Container>
         <EstiloContainerHabitos>
           <div className="top">
-            <h1>Segunda, 17/05</h1>
+            <h1>{diaDeHoje}</h1>
             <div className="subtop">
               <p className="porcentagem">67% dos hábitos concluídos</p> 
               <p className="nadaconcluido">Nenhum hábito concluído ainda.</p> 
@@ -20,7 +119,21 @@ export default function Hoje(){
         </EstiloContainerHabitos>
 
         <MainCardsHoje>
-          <MainCardHj/>
+          {
+            habitosDeHoje.map((habito) => {
+              return (
+                <MainCardHj
+                  key={habito.id}
+                  id={habito.id}
+                  name={habito.name}
+                  currentSequence={habito.currentSequence}
+                  highestSequence={habito.highestSequence}
+                  done={habito.done}
+                  marcarHabito={marcarHabito}
+                />
+              )
+            })
+          }
         </MainCardsHoje>
       </Container>
       <Footer />
