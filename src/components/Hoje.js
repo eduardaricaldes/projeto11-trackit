@@ -10,7 +10,6 @@ import Container from './Container';
 
 import {AutenticacaoContext} from '../context/AutenticacaoProvider';
 import {HabitosContext} from '../context/HabitosConcluidosProvider';
-import {URL_HABITOS_HJ_GET} from '../constants/api-trackit/url-habitos-hj/url-habitos-hj-get';
 import {URL_HABITOS_HJ_POST_CHECK} from '../constants/api-trackit/url-habitos-hj/url-habitos-hj-post-check';
 import {URL_HABITOS_HJ_POST_UNCHECK} from '../constants/api-trackit/url-habitos-hj/url-habitos-hj-post-uncheck';
 
@@ -19,7 +18,16 @@ import DiaFormatado from "../funcoes/dia-da-semana";
 export default function Hoje(){
   const [token] = useContext(AutenticacaoContext);
   const [diaDeHoje, setDiaDeHoje] = useState("");
-  const [setTotalAtivos, totalAtivos, setTotalHabitos, percentual, habitosDeHoje, setHabitos, habitosAtivos, setAtivos] = useContext(HabitosContext)
+  const [
+    setTotalAtivos,
+    totalAtivos,
+    setTotalHabitos,
+    percentual,
+    habitosDeHoje,
+    setHabitos,
+    habitosAtivos,
+    setAtivos
+  ] = useContext(HabitosContext)
 
   useEffect(() => {
     const mes = dayjs().month()

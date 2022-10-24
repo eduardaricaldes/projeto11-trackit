@@ -10,15 +10,29 @@ import CardCriarHabitos from "./Card-criar-habitos";
 import CardCriadoHabitos from "./Card-criado-habitos";
 import {URL_HABITOS_GET} from "../constants/api-trackit/url-habitos/url-habitos-get";
 import {AutenticacaoContext} from '../context/AutenticacaoProvider';
+import {HabitosContext} from '../context/HabitosConcluidosProvider';
 
 export default function Habitos(){
   const [habitos, setHabitos] = useState([]);
   const [mostrarHabitoVazio, setMostrarHabitoVazio] = useState(false);
   const [token] = useContext(AutenticacaoContext);
   const [mostrarCriarHabito, setMostrarHabito] = useState(false);
+  const [obteuDaApi, setObteu] = useState(false)
   // form de criacao de habito
   const [nome, setNome] = useState("")
   const [listDeDias, setListaDeDias] = useState([]);
+  const [
+    setTotalAtivos,
+    totalAtivos,
+    setTotalHabitos,
+    percentual,
+    habitosDeHoje,
+    setHabitosContext,
+    habitosAtivos,
+    setAtivos,
+    removerHabitoDeHoje,
+    adicionarAoHabitosDeHoje,
+  ] = useContext(HabitosContext);
 
   useEffect(() => {
     axios(URL_HABITOS_GET, {
@@ -28,14 +42,25 @@ export default function Habitos(){
     })
       .then((resposta) => {
         if(resposta.data?.length !== 0) {
-          setHabitos(resposta.data)
+          setHabitos(resposta.data);
+          setObteu(true)
         }else {
           setMostrarHabitoVazio(true);
+          setObteu(true)
         }
       }).catch(() => {
+        setObteu(true)
         alert("Nao conseguimos baixar seus habitos")
       })
   }, [token])
+
+  useEffect(() => {
+    if(habitos.length === 0 && obteuDaApi === true) {
+      setMostrarHabitoVazio(true)
+    }else {
+      setMostrarHabitoVazio(false);
+    }
+  }, [habitos, obteuDaApi])
 
   function criarHabitos() {
     setMostrarHabito(true)
@@ -43,7 +68,8 @@ export default function Habitos(){
   }
 
   function adicionarHabito(habito) {
-    setHabitos([...habitos, habito])
+    setHabitos([...habitos, habito]);
+    adicionarAoHabitosDeHoje(habito);
   }
 
   function removerHabito(habito) {
@@ -53,6 +79,7 @@ export default function Habitos(){
 
     habitos.splice(index, 1);
     setHabitos([...habitos]);
+    removerHabitoDeHoje(habito)
   }
 
   function removerForm() {
