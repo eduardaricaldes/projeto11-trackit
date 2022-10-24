@@ -18,34 +18,8 @@ import DiaFormatado from "../funcoes/dia-da-semana";
 
 export default function Hoje(){
   const [token] = useContext(AutenticacaoContext);
-  const [habitosDeHoje, setHabitos] = useState([]);
   const [diaDeHoje, setDiaDeHoje] = useState("");
-  const [habitosAtivos, setAtivos] = useState([])
-  const [setTotalAtivos, totalAtivos, setTotalHabitos, percentual] = useContext(HabitosContext)
-
-  useEffect(() => {
-    axios(URL_HABITOS_HJ_GET, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
-    .then((response) => {
-      const habitos = response.data
-      setHabitos(habitos);
-      setTotalHabitos(habitos.length)
-      const ativos = [];
-      habitos.map((habito) => {
-        if(habito.done) {
-          ativos.push(habito)
-        }
-      });
-      setTotalAtivos(ativos.length);
-      setAtivos(ativos);
-    })
-    .catch(() => {
-      alert("Nao conseguimos achar seus habitos de hoje")
-    })
-  }, [])
+  const [setTotalAtivos, totalAtivos, setTotalHabitos, percentual, habitosDeHoje, setHabitos, habitosAtivos, setAtivos] = useContext(HabitosContext)
 
   useEffect(() => {
     const mes = dayjs().month()

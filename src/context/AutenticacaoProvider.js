@@ -11,6 +11,7 @@ export const AutenticacaoContext = createContext([
 export const AutenticacaoProvider = ({ children }) => {
   const [token, setToken] = useState("");
   const [logado, setLogado] = useState(false);
+  const navigate = useNavigate();
 
   function armazenarToken(token) {
     setToken(token);

@@ -119,6 +119,8 @@ export default function Login (){
   display: flex;
   flex-direction: column;
   font-family: 'Lexend Deca', sans-serif;
+  background-color: #fff;
+  height: 100vh;
     .logo{
       display: flex;
       justify-content: center;

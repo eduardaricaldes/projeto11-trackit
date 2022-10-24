@@ -2,7 +2,6 @@ import {useContext} from 'react';
 import { Route, Routes } from "react-router-dom";
 
 import {AutenticacaoContext} from './context/AutenticacaoProvider';
-import {HabitosProvider} from './context/HabitosConcluidosProvider';
 
 import Login from "./components/Login";
 import Cadastrar from "./components/Cadastrar";
@@ -22,11 +21,7 @@ const RoutesApp = () => {
       <Route element={<Login/>} path="/" exact/>
       <Route element={<Cadastrar/>} path="/cadastro" exact/>
       <Route element={<RotaPrivada Componente={Habitos}/>} path="/habitos" exact/>
-      <Route element={
-        <HabitosProvider>
-          <RotaPrivada Componente={Hoje}/>
-        </HabitosProvider>
-      } path="/hoje" exact/>
+      <Route element={<RotaPrivada Componente={Hoje}/>} path="/hoje" exact/>
       <Route element={<RotaPrivada Componente={Historico}/>} path="/historico" exact/>
     </Routes>
   )
