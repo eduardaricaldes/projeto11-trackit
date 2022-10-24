@@ -18,26 +18,27 @@ export const HabitosProvider = ({ children }) => {
   useEffect(() => {
     if(token){
       axios(URL_HABITOS_HJ_GET, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
-    .then((response) => {
-      const habitos = response.data
-      setHabitos(habitos);
-      setTotalHabitos(habitos.length)
-      const ativos = [];
-      habitos.map((habito) => {
-        if(habito.done) {
-          ativos.push(habito)
+        headers: {
+          Authorization: `Bearer ${token}`
         }
-      });
-      setTotalAtivos(ativos.length);
-      setAtivos(ativos);
-    })
-    .catch(() => {
-      alert("Nao conseguimos achar seus habitos de hoje")
-    })}
+      })
+      .then((response) => {
+        const habitos = response.data
+        setHabitos(habitos);
+        setTotalHabitos(habitos.length)
+        const ativos = [];
+        habitos.map((habito) => {
+          if(habito.done) {
+            ativos.push(habito)
+          }
+        });
+        setTotalAtivos(ativos.length);
+        setAtivos(ativos);
+      })
+      .catch(() => {
+        alert("Nao conseguimos achar seus habitos de hoje")
+      })
+    }
   }, [token])
 
   useEffect(() => {
