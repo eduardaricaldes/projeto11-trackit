@@ -1,15 +1,41 @@
 import styled from "styled-components";
+import { useState } from "react";
+import check from '../assets/check.svg';
 
-import check from '../assets/check.svg'
+export default function MainCardHj(
+  {
+    id,
+    name,
+    done,
+    currentSequence,
+    highestSequence,
+    marcarHabito
+  }){
+  const [ativaSequencia, setAtivaSequencia] = useState('');
+  const [ativaRecorde, setAtivaRecorde] = useState('');
 
-export default function MainCardHj({ id, name, done, currentSequence, highestSequence, marcarHabito }){
+  function marcar(event) {
+    if(event.target && event.target.checked){
+      setAtivaSequencia('ativa');
+      if(currentSequence === highestSequence) {
+        setAtivaRecorde('ativa');
+      }
+    }else {
+      setAtivaSequencia('');
+      setAtivaRecorde('');
+    }
+    marcarHabito(event)
+  }
+
+  
+  
   return(
     <MainCards>
       <CardDados>
         <h2 className="titulohabito">{name}</h2>
         <DescricaoHabitos>
-          <p className="sequencia">Sequência atual: {currentSequence} dias</p>
-          <p className="record">Seu recorde: {highestSequence} dias</p>
+          <p className="sequencia">Sequência atual: <span className={ativaSequencia}>{currentSequence} dias</span></p>
+          <p className="record">Seu recorde: <span className={ativaRecorde}>{highestSequence} dias</span></p>
         </DescricaoHabitos>
       </CardDados>
       <CardCheckbox>
@@ -19,7 +45,7 @@ export default function MainCardHj({ id, name, done, currentSequence, highestSeq
             value={id}
             name={name}
             defaultChecked={done}
-            onChange={event => marcarHabito(event)}
+            onClick={event => marcar(event)}
           />
           <div className="check-icon">
             <img src={check} alt="check icon" />
@@ -60,6 +86,9 @@ const DescricaoHabitos = styled.div`
     font-weight: 400;
     font-size: 13px;
     line-height: 16px;
+  }
+  .ativa {
+    color: #8FC549;
   }
 `
 

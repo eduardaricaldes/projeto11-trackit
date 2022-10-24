@@ -1,11 +1,11 @@
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import "react-circular-progressbar/dist/styles.css";
 
-export default function CircularProgress({ percentual }){
+export default function CircularProgress({ percentual = 0 }){
   return(
     <CircularProgressbar value={percentual}
           maxValue={1}
-          text={`${percentual * 100}%`}
+          text={"Hoje"}
           background
         backgroundPadding={6}
         styles={buildStyles({

@@ -21,8 +21,7 @@ export default function Hoje(){
   const [habitosDeHoje, setHabitos] = useState([]);
   const [diaDeHoje, setDiaDeHoje] = useState("");
   const [habitosAtivos, setAtivos] = useState([])
-  const [setTotalAtivos, totalAtivos, setTotalHabitos] = useContext(HabitosContext)
-  
+  const [setTotalAtivos, totalAtivos, setTotalHabitos, percentual] = useContext(HabitosContext)
 
   useEffect(() => {
     axios(URL_HABITOS_HJ_GET, {
@@ -64,6 +63,17 @@ export default function Hoje(){
     return lista.findIndex((item) => item.id === id);
   }
 
+  function modifyHabitosHoje(habitosDeHojeList, id, done = false) {
+    const novoState = habitosDeHojeList.map((habito) => {
+      if(habito.id === id) {
+        return {...habito, done}
+      }
+      return habito
+    });
+
+    setHabitos(novoState);
+  }
+
   function marcarHabito(event) {
     const checkbox = event.target
     if(checkbox && checkbox.checked){
@@ -79,6 +89,8 @@ export default function Hoje(){
         const totalAt = totalAtivos + 1 
         setTotalAtivos(totalAt);
         setAtivos([...habitosAtivos, habito])
+        modifyHabitosHoje(habitosDeHoje, parseInt(id), true)
+        checkbox.checked = true;
       })
       .catch(() => {
         alert("Problema ao concluir habito")
@@ -96,6 +108,7 @@ export default function Hoje(){
         const totalAt = totalAtivos - 1 
         setTotalAtivos(totalAt);
         setAtivos([...habitosAtivos])
+        modifyHabitosHoje(habitosDeHoje, parseInt(id), false)
       })
       .catch(() => {
         alert("Problema ao concluir habito")
@@ -112,8 +125,16 @@ export default function Hoje(){
           <div className="top">
             <h1>{diaDeHoje}</h1>
             <div className="subtop">
-              <p className="porcentagem">67% dos hábitos concluídos</p> 
-              <p className="nadaconcluido">Nenhum hábito concluído ainda.</p> 
+              
+              {
+                percentual*100 === 0 ? (
+                  <p className="nadaconcluido">
+                    Nenhum hábito concluído ainda.
+                  </p> 
+                ) : (
+                  <p className="porcentagem">{percentual*100}% dos hábitos concluídos</p> 
+                )
+              }
             </div>
           </div>
         </EstiloContainerHabitos>
